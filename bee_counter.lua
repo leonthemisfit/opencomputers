@@ -9,7 +9,6 @@ local function get_size()
   return controller.getInventorySize(side)
 end
 
-
 local bees = {
   princess = {
     ignoble = {},
