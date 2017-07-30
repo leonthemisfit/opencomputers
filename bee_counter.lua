@@ -10,7 +10,7 @@ local function get_size()
 end
 
 
-local bees {
+local bees = {
   princess = {
     ignoble = {},
     pristine = {}
