@@ -84,7 +84,7 @@ local function print_bees()
 
   print("")
   print("DRONES:")
-  for k,v in pairs(bees.drones) do
+  for k,v in pairs(bees.drone) do
     print("  " .. k .. ": " .. tostring(v))
   end
 end
