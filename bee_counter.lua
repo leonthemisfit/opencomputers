@@ -1,11 +1,22 @@
-local controller = component.inventory_controller
+local controllers = {}
 local side = sides.top
 
-local function get_stack(indx)
+local function find_controllers()
+  for addr,name in pairs(component.list()) do
+    if name == "inventory_controller" then
+      controllers[#controllers+1] = component.proxy(addr)
+    end
+  end
+  if #controllers == 0 then
+    error("No controllers found!")
+  end
+end
+
+local function get_stack(controller, indx)
   return controller.getStackInSlot(side, indx)
 end
 
-local function get_size()
+local function get_size(controller)
   return controller.getInventorySize(side)
 end
 
@@ -62,9 +73,11 @@ local function count_bee(stack)
 end
 
 local function count_bees()
-  for i = 1, get_size() do
-    local stack = get_stack(i)
-    count_bee(stack)
+  for _,controller in ipairs(controllers) do
+    for i = 1, get_size(controller) do
+      local stack = get_stack(controller, i)
+      count_bee(stack)
+    end
   end
 end
 
