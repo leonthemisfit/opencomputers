@@ -46,7 +46,7 @@ local function count_bee(stack)
   local gender = gender(stack)
   local species = species(stack)
   if gender == "princess" then
-    local type = pricess_type(stack)
+    local type = princess_type(stack)
     if not bees.princess[type][species] then
       bees.princess[type][species] = 0
     end
