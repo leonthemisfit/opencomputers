@@ -76,7 +76,9 @@ local function count_bees()
   for _,controller in ipairs(controllers) do
     for i = 1, get_size(controller) do
       local stack = get_stack(controller, i)
-      count_bee(stack)
+      if stack then
+        count_bee(stack)
+      end
     end
   end
 end
