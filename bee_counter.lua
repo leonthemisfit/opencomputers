@@ -1,3 +1,6 @@
+local component = require("component")
+local sides = require("sides")
+
 local controllers = {}
 local side = sides.top
 
