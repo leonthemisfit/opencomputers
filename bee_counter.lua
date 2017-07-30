@@ -101,5 +101,6 @@ local function print_bees()
   end
 end
 
+find_controllers()
 count_bees()
 print_bees()
