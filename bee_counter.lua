@@ -20,7 +20,10 @@ local bees = {
     ignoble = {},
     pristine = {}
   },
-  drone = {}
+  drone = {},
+  princess_total = 0,
+  drone_total = 0,
+  total = 0
 }
 
 local function species(stack)
@@ -51,12 +54,16 @@ local function count_bee(stack)
   local gender = gender(stack)
   local species = species(stack)
   if gender == "princess" then
+    bees.total = bees.total + 1
+    bees.princess_total = bees.princess_total + 1
     local type = princess_type(stack)
     if not bees.princess[type][species] then
       bees.princess[type][species] = 0
     end
     bees.princess[type][species] = bees.princess[type][species] + 1
   elseif gender == "drone" then
+    bees.total = bees.total + 1
+    bees.drone_total = bees.drone_total + 1
     local total = count(stack)
     if not bees.drone[species] then
       bees.drone[species] = 0
@@ -81,8 +88,9 @@ local function count_bees()
 end
 
 local function print_bees()
+  print("BEES TOTAL: " .. tostring(bees.total))
   print("PRINCESSES:")
-
+  print("  TOTAL: " .. tostring(bees.princess_total))
   print("  IGNOBLE:")
   for k,v in pairs(bees.princess.ignoble) do
     print("    " .. k .. ": " .. tostring(v))
@@ -95,6 +103,7 @@ local function print_bees()
 
   print("")
   print("DRONES:")
+  print("  TOTAL: " .. tostring(bees.drone_total))
   for k,v in pairs(bees.drone) do
     print("  " .. k .. ": " .. tostring(v))
   end
