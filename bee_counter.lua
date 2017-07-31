@@ -70,7 +70,7 @@ end
 local function count_bees()
   for _,controller in ipairs(controllers) do
     for _, side in ipairs(controller_sides) do
-      for i = 1, controller.getInventorySize(side)
+      for i = 1, controller.getInventorySize(side) do
         local stack = controller.getStackInSlot(side, i)
         if stack then
           count_bee(stack)
