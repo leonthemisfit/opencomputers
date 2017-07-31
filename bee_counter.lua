@@ -2,7 +2,7 @@ local component = require("component")
 local sides = require("sides")
 
 local controllers = {}
-local side = sides.top
+local controller_sides = { sides.top, sides.west }
 
 local function find_controllers()
   for addr,name in pairs(component.list()) do
@@ -13,14 +13,6 @@ local function find_controllers()
   if #controllers == 0 then
     error("No controllers found!")
   end
-end
-
-local function get_stack(controller, indx)
-  return controller.getStackInSlot(side, indx)
-end
-
-local function get_size(controller)
-  return controller.getInventorySize(side)
 end
 
 local bees = {
@@ -77,10 +69,12 @@ end
 
 local function count_bees()
   for _,controller in ipairs(controllers) do
-    for i = 1, get_size(controller) do
-      local stack = get_stack(controller, i)
-      if stack then
-        count_bee(stack)
+    for _, side in ipairs(controller_sides) do
+      for i = 1, controller.getInventorySize(side)
+        local stack = controller.getStackInSlot(side, i)
+        if stack then
+          count_bee(stack)
+        end
       end
     end
   end
