@@ -63,8 +63,8 @@ local function count_bee(stack)
     bees.princess[type][species] = bees.princess[type][species] + 1
   elseif gender == "drone" then
     bees.total = bees.total + 1
-    bees.drone_total = bees.drone_total + 1
     local total = count(stack)
+    bees.drone_total = bees.drone_total + total
     if not bees.drone[species] then
       bees.drone[species] = 0
     end
