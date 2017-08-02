@@ -89,4 +89,6 @@ inventory:set_meta("ipairs", function (self)
   end
 end)
 
+inventory:add_method("iter", getmetatable(inventory).__ipairs)
+
 return inventory
