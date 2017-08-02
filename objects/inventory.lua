@@ -84,7 +84,7 @@ inventory:add_method("iter", function (self)
     i = i + 1
     if i < n then
       local raw_stack = self.proxy.getStackInSlot(self.side, i) or {}
-      return item_stack(raw_stack)
+      return i, item_stack(raw_stack)
     end
   end
 end)
