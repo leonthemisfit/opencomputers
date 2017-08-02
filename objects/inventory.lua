@@ -78,7 +78,7 @@ inventory:add_method("scan", function (self)
   return inv
 end)
 
-inventory:add_method("iter", function (self)
+inventory:set_meta("ipairs", function (self)
   local i, n = 0, self.size
   return function ()
     i = i + 1
