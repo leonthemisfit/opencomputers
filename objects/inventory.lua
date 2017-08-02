@@ -1,5 +1,8 @@
 local class = require("class")
 local item_stack = require("item_stack")
+local monkeypatch = require("monkeypatch")
+
+monkeypatch.patch_all()
 
 local inventory = class("inventory")
 
@@ -89,6 +92,8 @@ inventory:set_meta("ipairs", function (self)
   end
 end)
 
-inventory:add_method("iter", getmetatable(inventory).__ipairs)
+--[[ This method only needs to be uncommented if monkeypatching is removed
+for ipairs and pairs ]]
+--inventory:add_method("iter", getmetatable(inventory).__ipairs)
 
 return inventory
