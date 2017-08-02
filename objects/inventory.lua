@@ -69,4 +69,13 @@ inventory:add_method("get_slot_size", function (self, slot)
   return self.proxy.getSlotStackSize(self.side, slot)
 end)
 
+inventory:add_method("scan", function (self)
+  local inv = {}
+  for i = 1, self.size do
+    local raw_stack = self.proxy.getStackInSlot(self.side, i) or {}
+    inv[#inv+1] = item_stack(raw_stack)
+  end
+  return inv
+end)
+
 return inventory
