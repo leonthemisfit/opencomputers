@@ -4,7 +4,7 @@ local item_stack = require("item_stack")
 local inventory = class("inventory")
 
 inventory:add_readonly_property("proxy", {})
-inventory:add_readonly_property("side", {})
+inventory:add_readonly_property("side", 1)
 
 inventory:add_getter("size", function (self)
   return self.proxy.getInventorySize(self.side)
