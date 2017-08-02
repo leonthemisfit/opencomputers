@@ -51,7 +51,7 @@ inventory:add_method("store", function (self, inv_slot, db_addr, db_slot)
   return self.proxy.store(self.side, inv_slot, db_addr, db_slot)
 end)
 
-inventory:add_overloaded_method("compare_to_db", {"number", "string", "number"}
+inventory:add_overloaded_method("compare_to_db", {"number", "string", "number"},
 function (self, inv_slot, db_addr, db_slot)
   return self.proxy.compareStackToDatabase(self.side, inv_slot, db_addr, db_slot)
 end)
