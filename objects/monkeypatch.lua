@@ -1,5 +1,6 @@
 local oipairs = ipairs
 local opairs = pairs
+local otype = type
 
 local monkeypatch = {}
 
@@ -21,9 +22,21 @@ function monkeypatch.pairs(t)
   end
 end
 
+--[[ This duplicates the class.type functionality found in lua-objects but I'm
+also including it here so it can be used to easily patch the built in type
+checking function ]]
+function monkeypatch.type(t)
+  if otype(t) == "table" and t.__name then
+    return t.__name
+  else
+    return otype(t)
+  end
+end
+
 function monkeypatch.patch_all()
   ipairs = monkeypatch.ipairs
   pairs = monkeypatch.pairs
+  type = monkeypatch.type
 end
 
 return monkeypatch
