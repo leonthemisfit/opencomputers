@@ -23,15 +23,9 @@ function monkeypatch.pairs(t)
   end
 end
 
---[[ This duplicates the class.type functionality found in lua-objects but I'm
-also including it here so it can be used to easily patch the built in type
-checking function ]]
-monkeypatch.type = class_util.type
-
 function monkeypatch.patch_all()
   ipairs = monkeypatch.ipairs
   pairs = monkeypatch.pairs
-  --type = monkeypatch.type <- this breaks OC tab completion, don't do it
 end
 
 return monkeypatch
