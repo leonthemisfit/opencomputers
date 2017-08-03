@@ -36,7 +36,7 @@ end
 function monkeypatch.patch_all()
   ipairs = monkeypatch.ipairs
   pairs = monkeypatch.pairs
-  type = monkeypatch.type
+  --type = monkeypatch.type <- this breaks OC tab completion, don't do it
 end
 
 return monkeypatch
