@@ -33,7 +33,7 @@ if filesystem.exists(CACHE_PATH) then
 end
 
 local function move(inv_a, slot, inv_b)
-  return transposer.transferItem(inv_a.side, inv_b.side, 1, slot)
+  return transposer.transferItem(inv_a.side, inv_b.side, inv_a:get_stack(slot).size, slot)
 end
 
 local function iter()
@@ -47,7 +47,7 @@ local function iter()
 end
 
 local function learn(name)
-  term.write("Unknown item '" .. name .. "', (c)heck, (i)gnore, or (d)elete?")
+  term.write("Unknown item '" .. name .. "', (c)heck, (i)gnore, or (d)elete? ")
   local c = term.read()
   if c == "c\n" then
     cache[name] = states.CHECK
@@ -92,5 +92,5 @@ while true do
   file:write(serial)
   file:close()
 
-  os.sleep(5)
+  os.sleep(1)
 end
