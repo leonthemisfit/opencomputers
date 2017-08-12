@@ -29,7 +29,7 @@ local function iter()
   return function()
     i = i + 1
     if i <= inv.controller.size then
-      return i, inv.controller.get_stack(i)
+      return i, inv.controller:get_stack(i)
     end
   end
 end
