@@ -25,6 +25,8 @@ local states = {
 
 local cache = {}
 
+local cache_changed = false
+
 if filesystem.exists(CACHE_PATH) then
   local file = io.open(CACHE_PATH)
   local data = file:read("*a")
@@ -47,6 +49,7 @@ local function iter()
 end
 
 local function learn(name)
+  cache_changed = true
   term.write("Unknown item '" .. name .. "', (c)heck, (i)gnore, or (d)elete? ")
   local c = term.read()
   if c == "c\n" then
@@ -87,10 +90,13 @@ while true do
     end
   end
 
-  local serial = serialization.serialize(cache)
-  local file = io.open(CACHE_PATH, "w")
-  file:write(serial)
-  file:close()
+  if cache_changed then
+    local serial = serialization.serialize(cache)
+    local file = io.open(CACHE_PATH, "w")
+    file:write(serial)
+    file:close()
+    cache_changed = false
+  end
 
   os.sleep(1)
 end
