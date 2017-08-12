@@ -32,6 +32,14 @@ item_stack:add_getter("has_nbt", function (self)
   return self.raw.hasTag
 end)
 
+item_stack:add_getter("enchantments" function (self)
+  if self.raw.enchantments then
+    return self.raw.enchantments
+  else
+    return {}
+  end
+end)
+
 item_stack:add_constructor({"table"}, function (self, tbl)
   self.privates.raw = tbl
 end)
