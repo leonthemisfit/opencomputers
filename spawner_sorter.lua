@@ -37,11 +37,11 @@ end
 local function learn(name)
   term.write("Unknown item '" .. name .. "', (c)heck, (i)gnore, or (d)elete?")
   local c = term.read()
-  if c == "c" then
+  if c == "c\n" then
     cache[name] = states.CHECK
-  elseif c == "i" then
+  elseif c == "i\n" then
     cache[name] = states.IGNORE
-  elseif c == "d" then
+  elseif c == "d\n" then
     cache[name] = states.DELETE
   else
     learn(name)
