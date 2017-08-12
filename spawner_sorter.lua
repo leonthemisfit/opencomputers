@@ -35,7 +35,12 @@ if filesystem.exists(CACHE_PATH) then
 end
 
 local function move(inv_a, slot, inv_b)
-  return transposer.transferItem(inv_a.side, inv_b.side, inv_a:get_stack(slot).size, slot)
+  local stack = inv_a:get_stack(slot)
+  if stack then
+    return transposer.transferItem(inv_a.side, inv_b.side, stack.size, slot)
+  else
+    return false
+  end
 end
 
 local function iter()
