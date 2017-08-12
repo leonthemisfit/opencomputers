@@ -3,6 +3,11 @@ local component = require("component")
 local term = require("term")
 local os = require("os")
 local inventory = require("inventory")
+local filesystem = require("filesystem")
+local io = require("io")
+local serialization = require("serialization")
+
+local CACHE_PATH = "/home/itemcache.dat"
 
 local transposer = component.transposer
 
@@ -19,6 +24,13 @@ local states = {
 }
 
 local cache = {}
+
+if filesystem.exists(CACHE_PATH) then
+  local file = io.open(CACHE_PATH)
+  local data = file:read("*a")
+  file:close()
+  cache = serialization.unserialize(data)
+end
 
 local function move(inv_a, slot, inv_b)
   return transposer.transferItem(inv_a.side, inv_b.side, 1, slot)
@@ -74,6 +86,11 @@ while true do
       end
     end
   end
+
+  local serial = serialization.serialize(cache)
+  local file = io.open(CACHE_PATH, "w")
+  file:write(serial)
+  file:close()
 
   os.sleep(5)
 end
