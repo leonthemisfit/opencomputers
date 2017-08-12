@@ -25,7 +25,7 @@ local function move(inv_a, slot, inv_b)
 end
 
 local function iter()
-  local i = 34
+  local i = 1
   return function()
     i = i + 1
     if i <= inv.controller.size then
