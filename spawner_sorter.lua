@@ -8,6 +8,7 @@ local io = require("io")
 local serialization = require("serialization")
 
 local CACHE_PATH = "/home/itemcache.dat"
+local EMPTY_COUNT = 5
 
 local transposer = component.transposer
 
@@ -77,6 +78,7 @@ local function try_move(slot)
 end
 
 while true do
+  local empty = 0
   for i, stack in iter() do
     if stack then
       if cache[stack.name] == states.DELETE then
@@ -91,6 +93,11 @@ while true do
         end
       elseif cache[stack.name] ~= states.IGNORE then
         learn(stack.name)
+      end
+    else
+      empty = empty + 1
+      if empty >= EMPTY_COUNT then
+        break
       end
     end
   end
